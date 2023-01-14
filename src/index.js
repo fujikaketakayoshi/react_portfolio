@@ -46,22 +46,42 @@ function ItemList() {
 }
 
 function IconList() {
-    return (
-    <ul class="icon-list">
-        <li>
-            <a href="https://github.com/fujikaketakayoshi"><img src="img/github.png" alt="github" /></a>
-        </li>
-        <li>
-            <a href="https://twitter.com/fujikaketkys"><img src="img/twitter.png" alt="twitter" /></a>
-        </li>
-        <li>
-            <a href="https://www.linkedin.com/in/fujikake/"><img src="img/linkedin.png" alt="LinkedIn" /></a>
-        </li>
-        <li>
-            <a href="https://www.youtube.com/channel/UC7c6Ld6t5KGEhgfkSaR0f0g"><img className="youtube" src="img/youtube_logo_icon.png" alt="フジカケチャンネル" /></a>
-        </li>
-    </ul>
-    );
+    const arr = [
+        {
+            'link': "https://github.com/fujikaketakayoshi",
+            'src': "img/github.png",
+            'alt': "github",
+        },
+        {
+            'link': "https://twitter.com/fujikaketkys",
+            'src': "img/twitter.png",
+            'alt': "twitter",
+        },
+        {
+            'link': "https://www.linkedin.com/in/fujikake/",
+            'src': "img/linkedin.png",
+            'alt': "LinkedIn",
+        },
+        {
+            'link': "https://www.youtube.com/channel/UC7c6Ld6t5KGEhgfkSaR0f0g",
+            'className': "youtube",
+            'src': "img/youtube_logo_icon.png",
+            'alt': "フジカケチャンネル",
+        },
+    ];
+    
+    
+        const list = [];
+        arr.forEach(function(v) {
+            list.push(<li><a href={v.link}><img className={v.className} src={v.src} alt={v.alt} /></a></li>);
+        })
+        console.log(list);
+        return (
+            <ul class="icon-list">
+                { list }
+            </ul>
+        );
+
 }
 
 
@@ -75,39 +95,84 @@ function Works() {
 }
 
 function WorksList() {
+    const arr = [
+        {
+            'src': "img/aiwordsalad.png",
+            'alt': "AIワードサラダの画像",
+            'h3_text': "AI Wordsalad",
+            'tech': "HTML / CSS / PHP",
+            'className': "link",
+            'links': [
+                {
+                    'href': "https://aiwordsalad.com/",
+                    'a_text': "Webサイト",
+                },
+                {
+                    'href': "https://github.com/fujikaketakayoshi/aiwordsalad",
+                    'a_text': "GitHub",
+                },
+            ],
+        },
+        {
+            'src': "img/okwave.png",
+            'alt': "OKWaveの画像",
+            'h3_text': "OKWaveリプレース案件",
+            'tech': "仕様策定 / 詳細設計 / PHP / MySQL / Solr",
+            'className': "link",
+            'links': [
+                {
+                    'href': "https://okwave.jp/",
+                    'a_text': "Webサイト",
+                },
+            ],
+        },
+        {
+            'src': "img/weekly_ascii.jpg",
+            'alt': "週刊アスキーの画像",
+            'h3_text': "週刊アスキーにてTwitterメールクライアント「tmitter」掲載",
+            'tech': "Perl / MySQL / Sendmail",
+        },
+        {
+            'src': "img/laravel-bbs.png",
+            'alt': "Laravel BBSの画像",
+            'h3_text': "Laravel BBS",
+            'tech': "Laravel / MySQL / ubuntu",
+            'className': "link",
+            'links': [
+                {
+                    'href': "https://laravel-bbs.com/",
+                    'a_text': "Webサイト",
+                },
+                {
+                    'href': "https://github.com/fujikaketakayoshi/live_coding/tree/master/laravel_bbs",
+                    'a_text': "GitHub",
+                },
+            ]
+        },
+    ];
+    const list = [];
+    arr.forEach(function(v) {
+        const alist = [];
+        if (v.className == 'link') {
+            v.links.forEach(function(vv){
+                alist.push(<a href={vv.href}>{vv.a_text}</a>);
+            });
+        }
+        list.push(
+            <li>
+                <img src={v.src} alt={v.alt} />
+                <h3>{v.h3_text}</h3>
+                <span>{v.tech}</span>
+                <div className={v.className}>
+                    {alist}
+                </div>
+            </li>
+); 
+    });
+    
     return (
         <ul className="works-list">
-            <li>
-                <img src="img/aiwordsalad.png" alt="AIワードサラダの画像" />
-                <h3>AI Wordsalad</h3>
-                <span>HTML / CSS / PHP</span>
-                <div className="link">
-                    <a href="https://aiwordsalad.com/">Webサイト</a>
-                    <a href="https://github.com/fujikaketakayoshi/aiwordsalad">GitHub</a>
-                </div>
-            </li>
-            <li>
-                <img src="img/okwave.png" alt="OKWaveの画像" />
-                <h3>OKWaveリプレース案件</h3>
-                <span>仕様策定 / 詳細設計 / PHP / MySQL / Solr</span>
-                <div className="link">
-                    <a href="https://okwave.jp/">Webサイト</a>
-                </div>
-            </li>
-            <li>
-                <img src="img/weekly_ascii.jpg" alt="週刊アスキーの画像" />
-                <h3>週刊アスキーにてTwitterメールクライアント「tmitter」掲載</h3>
-                <span>Perl / MySQL / Sendmail</span>
-            </li>
-            <li>
-                <img src="img/laravel-bbs.png" alt="Laravel BBSの画像" />
-                <h3>Laravel BBS</h3>
-                <span>Laravel / MySQL / ubuntu</span>
-                <div className="link">
-                    <a href="https://laravel-bbs.com/">Webサイト</a>
-                    <a href="https://github.com/fujikaketakayoshi/live_coding/tree/master/laravel_bbs">GitHub</a>
-                </div>
-            </li>
+            { list }
         </ul>
     );
 }
