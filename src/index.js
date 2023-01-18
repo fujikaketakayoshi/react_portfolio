@@ -45,45 +45,55 @@ function ItemList() {
     );
 }
 
-function IconList() {
-    const arr = [
-        {
-            'link': "https://github.com/fujikaketakayoshi",
-            'src': "img/github.png",
-            'alt': "github",
-        },
-        {
-            'link': "https://twitter.com/fujikaketkys",
-            'src': "img/twitter.png",
-            'alt': "twitter",
-        },
-        {
-            'link': "https://www.linkedin.com/in/fujikake/",
-            'src': "img/linkedin.png",
-            'alt': "LinkedIn",
-        },
-        {
-            'link': "https://www.youtube.com/channel/UC7c6Ld6t5KGEhgfkSaR0f0g",
-            'className': "youtube",
-            'src': "img/youtube_logo_icon.png",
-            'alt': "フジカケチャンネル",
-        },
-    ];
+class IconList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoaded: false,
+            error: null,
+            icons: []
+        };
+    }
     
+    componentDidMount() {
+        fetch("http://localhost:3000/iconlist.json")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    isLoaded: true,
+                    icons: result.list
+                });
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error
+                });
+            }
+        )
+    }
     
-        const list = [];
-        arr.forEach(function(v) {
-            list.push(<li><a href={v.link}><img className={v.className} src={v.src} alt={v.alt} /></a></li>);
-        })
-        console.log(list);
-        return (
-            <ul class="icon-list">
-                { list }
-            </ul>
-        );
-
+    render() {
+        if (this.state.error) {
+            return <div>Error: {this.state.error.message}</div>;
+        }
+        else if ( !this.state.isLoaded) {
+            return <div>Loading...</div>;
+        }
+        else {
+            return (
+                <ul className="icon-list">
+                    {this.state.icons.map(v => (
+                        <li key={v.id.toString()}>
+                            <a href={v.link}><img className={v.className} src={v.src} alt={v.alt} /></a>
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+    }
 }
-
 
 function Works() {
     return (
@@ -94,87 +104,63 @@ function Works() {
     );
 }
 
-function WorksList() {
-    const arr = [
-        {
-            'src': "img/aiwordsalad.png",
-            'alt': "AIワードサラダの画像",
-            'h3_text': "AI Wordsalad",
-            'tech': "HTML / CSS / PHP",
-            'className': "link",
-            'links': [
-                {
-                    'href': "https://aiwordsalad.com/",
-                    'a_text': "Webサイト",
-                },
-                {
-                    'href': "https://github.com/fujikaketakayoshi/aiwordsalad",
-                    'a_text': "GitHub",
-                },
-            ],
-        },
-        {
-            'src': "img/okwave.png",
-            'alt': "OKWaveの画像",
-            'h3_text': "OKWaveリプレース案件",
-            'tech': "仕様策定 / 詳細設計 / PHP / MySQL / Solr",
-            'className': "link",
-            'links': [
-                {
-                    'href': "https://okwave.jp/",
-                    'a_text': "Webサイト",
-                },
-            ],
-        },
-        {
-            'src': "img/weekly_ascii.jpg",
-            'alt': "週刊アスキーの画像",
-            'h3_text': "週刊アスキーにてTwitterメールクライアント「tmitter」掲載",
-            'tech': "Perl / MySQL / Sendmail",
-        },
-        {
-            'src': "img/laravel-bbs.png",
-            'alt': "Laravel BBSの画像",
-            'h3_text': "Laravel BBS",
-            'tech': "Laravel / MySQL / ubuntu",
-            'className': "link",
-            'links': [
-                {
-                    'href': "https://laravel-bbs.com/",
-                    'a_text': "Webサイト",
-                },
-                {
-                    'href': "https://github.com/fujikaketakayoshi/live_coding/tree/master/laravel_bbs",
-                    'a_text': "GitHub",
-                },
-            ]
-        },
-    ];
-    const list = [];
-    arr.forEach(function(v) {
-        const alist = [];
-        if (v.className == 'link') {
-            v.links.forEach(function(vv){
-                alist.push(<a href={vv.href}>{vv.a_text}</a>);
-            });
-        }
-        list.push(
-            <li>
-                <img src={v.src} alt={v.alt} />
-                <h3>{v.h3_text}</h3>
-                <span>{v.tech}</span>
-                <div className={v.className}>
-                    {alist}
-                </div>
-            </li>
-); 
-    });
+class WorksList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoaded: false,
+            error: null,
+            works: []
+        };
+    }
     
-    return (
-        <ul className="works-list">
-            { list }
-        </ul>
-    );
+    componentDidMount() {
+        fetch("http://localhost:3000/workslist.json")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    isLoaded: true,
+                    works: result.list
+                });
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error
+                });
+            }
+        )
+    }
+
+    render() {
+        if (this.state.error) {
+            return <div>Error: {this.state.error.message}</div>;
+        }
+        else if ( !this.state.isLoaded) {
+            return <div>Loading...</div>;
+        }
+        else {
+            return (
+                <ul className="works-list">
+                    {this.state.works.map(v => (
+                        <li key={v.id.toString()}>
+                            <img src={v.src} alt={v.alt} />
+                            <h3>{v.h3_text}</h3>
+                            <span>{v.tech}</span>
+                            <div className={v.className}>
+                            { v.className == 'link' &&
+                                v.links.map((vv, index) => (
+                                    <a key={index} href={vv.href}>{vv.a_text}</a>
+                                ))
+                             }
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+    }
 }
 
 function BoxQuery() {
