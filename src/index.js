@@ -7,7 +7,7 @@ function Header() {
     return (
         <header>
             <h1 className="block-header">
-                <a href=""><span className="color-green">P</span>ortfolio</a>
+                <a href="/"><span className="color-green">P</span>ortfolio</a>
             </h1>
         </header>
     );
@@ -51,12 +51,35 @@ class IconList extends React.Component {
         this.state = {
             isLoaded: false,
             error: null,
+            icon_sort: true,
             icons: []
         };
+        this.handleClick = this.handleClick.bind(this);
+    }
+    
+    handleClick() {
+         const url = this.state.icon_sort ? "/iconlist_re.json" : "/iconlist.json";
+        fetch(url)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    isLoaded: true,
+                    icons: result.list,
+                    icon_sort: ! this.state.icon_sort
+                });
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error
+                });
+            }
+        )
     }
     
     componentDidMount() {
-        fetch("http://localhost:3000/iconlist.json")
+        fetch("/iconlist.json")
         .then(res => res.json())
         .then(
             (result) => {
@@ -84,8 +107,9 @@ class IconList extends React.Component {
         else {
             return (
                 <ul className="icon-list">
-                    {this.state.icons.map(v => (
-                        <li key={v.id.toString()}>
+                        <button onClick={this.handleClick}>アイコン並び替え</button>
+                    {this.state.icons.map((v, index) => (
+                        <li key={index}>
                             <a href={v.link}><img className={v.className} src={v.src} alt={v.alt} /></a>
                         </li>
                     ))}
@@ -115,7 +139,7 @@ class WorksList extends React.Component {
     }
     
     componentDidMount() {
-        fetch("http://localhost:3000/workslist.json")
+        fetch("/workslist.json")
         .then(res => res.json())
         .then(
             (result) => {
@@ -149,7 +173,7 @@ class WorksList extends React.Component {
                             <h3>{v.h3_text}</h3>
                             <span>{v.tech}</span>
                             <div className={v.className}>
-                            { v.className == 'link' &&
+                            { v.className === 'link' &&
                                 v.links.map((vv, index) => (
                                     <a key={index} href={vv.href}>{vv.a_text}</a>
                                 ))
