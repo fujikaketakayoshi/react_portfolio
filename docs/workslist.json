@@ -1,0 +1,61 @@
+{
+    "list" : [
+        {
+            "id": 1,
+            "src": "img/aiwordsalad.png",
+            "alt": "AIワードサラダの画像",
+            "h3_text": "AI Wordsalad",
+            "tech": "HTML / CSS / PHP",
+            "className": "link",
+            "links": [
+                {
+                    "href": "https://aiwordsalad.com/",
+                    "a_text": "Webサイト"
+                },
+                {
+                    "href": "https://github.com/fujikaketakayoshi/aiwordsalad",
+                    "a_text": "GitHub"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "src": "img/okwave.png",
+            "alt": "OKWaveの画像",
+            "h3_text": "OKWaveリプレース案件",
+            "tech": "仕様策定 / 詳細設計 / PHP / MySQL / Solr",
+            "className": "link",
+            "links": [
+                {
+                    "href": "https://okwave.jp/",
+                    "a_text": "Webサイト"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "src": "img/weekly_ascii.jpg",
+            "alt": "週刊アスキーの画像",
+            "h3_text": "週刊アスキーにてTwitterメールクライアント「tmitter」掲載",
+            "tech": "Perl / MySQL / Sendmail"
+        },
+        {
+            "id": 4,
+            "src": "img/laravel-bbs.png",
+            "alt": "Laravel BBSの画像",
+            "h3_text": "Laravel BBS",
+            "tech": "Laravel / MySQL / ubuntu",
+            "className": "link",
+            "links": [
+                {
+                    "href": "https://laravel-bbs.com/",
+                    "a_text": "Webサイト"
+                },
+                {
+                    "href": "https://github.com/fujikaketakayoshi/live_coding/tree/master/laravel_bbs",
+                    "a_text": "GitHub"
+                }
+            ]
+        }
+    ]
+}

@@ -58,7 +58,7 @@ class IconList extends React.Component {
     }
     
     handleClick() {
-         const url = this.state.icon_sort ? "/iconlist_re.json" : "/iconlist.json";
+         const url = this.state.icon_sort ? "/react_portfolio_build/iconlist_re.json" : "/react_portfolio_build/iconlist.json";
         fetch(url)
         .then(res => res.json())
         .then(
@@ -107,7 +107,7 @@ class IconList extends React.Component {
         else {
             return (
                 <ul className="icon-list">
-                        <button onClick={this.handleClick}>アイコン並び替え</button>
+                        <button onClick={this.handleClick}>並び替え</button>
                     {this.state.icons.map((v, index) => (
                         <li key={index}>
                             <a href={v.link}><img className={v.className} src={v.src} alt={v.alt} /></a>
