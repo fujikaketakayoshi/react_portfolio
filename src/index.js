@@ -38,7 +38,7 @@ function ItemList() {
             <img className="profile" src="img/profile.jpg" alt="プロフィール画像" />
             <b>藤掛貴由</b>
             <p className="color-green">Perl / PHP / Ruby / MySQL / JavaScript / CodeIgniter / Laravel</p>
-            <p>主にサーバサイドの開発をやりますが、jQueryぐらいなら何とかJavaScriptもやれます。PHPをメイン言語としております。HTML作成からWebAPI叩きまでPHPです。フレームワークはLaravel勉強中、vue.jsは基礎的なことだけです。上級エンジニアと称して、月単価150万円で売られていたことがあります。SEっぽいこともできるようですし、リプレースの案件とか得意な気もします。全文検索のノウハウなんかもあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
+            <p>主にサーバサイドの開発をやりますが、フロントエンドはjQueryがそれなりにJavaScriptもやれます。React練習中です。このサイトはReactで実装してます。PHPをメイン言語としております。HTML作成からWebAPI叩きまでPHPです。フレームワークはLaravelそれなりですが、MVCならなんでもいけると思っています。上級エンジニアと称して、月単価150万円で売られていたことがあります。SEっぽいこともできるようですし、リプレースの案件とか得意な気もします。全文検索のノウハウなんかもあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
             最近、YouTubeでフジカケチャンネル始めました。ライブコーディングを中心に活動していく予定です。</p>
             <IconList />
         </div>
