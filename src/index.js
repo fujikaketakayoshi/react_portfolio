@@ -58,7 +58,7 @@ class IconList extends React.Component {
     }
     
     handleClick() {
-         const url = this.state.icon_sort ? "/react_portfolio_build/iconlist_re.json" : "/react_portfolio_build/iconlist.json";
+         const url = this.state.icon_sort ? "iconlist_re.json" : "iconlist.json";
         fetch(url)
         .then(res => res.json())
         .then(
@@ -79,7 +79,7 @@ class IconList extends React.Component {
     }
     
     componentDidMount() {
-        fetch("/iconlist.json")
+        fetch("iconlist.json")
         .then(res => res.json())
         .then(
             (result) => {
@@ -139,7 +139,7 @@ class WorksList extends React.Component {
     }
     
     componentDidMount() {
-        fetch("/workslist.json")
+        fetch("workslist.json")
         .then(res => res.json())
         .then(
             (result) => {
