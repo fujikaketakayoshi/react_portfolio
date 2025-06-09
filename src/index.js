@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { HashRouter } from 'react-router-dom';
 import './index.css';
 
 
@@ -212,10 +213,12 @@ function Footer() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <div>
-        <Header />
-        <BlockMain />
-        <Footer />
-    </div>
+    <HashRouter>
+        <div>
+            <Header />
+            <BlockMain />
+            <Footer />
+        </div>
+    </HashRouter>
 );
 
