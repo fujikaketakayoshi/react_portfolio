@@ -44,7 +44,7 @@
             "src": "img/laravel-bbs.png",
             "alt": "Laravel BBSの画像",
             "h3_text": "Laravel BBS",
-            "tech": "Laravel / MySQL / ubuntu",
+            "tech": "Laravel / MySQL / AlmaLinux / Mailtrap",
             "className": "link",
             "links": [
                 {
