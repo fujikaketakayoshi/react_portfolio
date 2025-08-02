@@ -39,8 +39,8 @@ function ItemList() {
             <img className="profile" src="img/profile.jpg" alt="プロフィール画像" />
             <b>藤掛貴由</b>
             <p className="color-green">Perl / PHP / Ruby / MySQL / JavaScript / CodeIgniter / Laravel</p>
-            <p>主にサーバサイドの開発をやりますが、フロントエンドはjQueryがそれなりにJavaScriptもやれます。React練習中です。このサイトはReactで実装してます。PHPをメイン言語としております。HTML作成からWebAPI叩きまでPHPです。フレームワークはLaravelそれなりですが、MVCならなんでもいけると思っています。上級エンジニアと称して、月単価150万円で売られていたことがあります。SEっぽいこともできるようですし、リプレースの案件とか得意な気もします。全文検索のノウハウなんかもあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
-            最近、YouTubeでフジカケチャンネル始めました。ライブコーディングを中心に活動していく予定です。</p>
+            <p>主にサーバサイドの開発をやりますが、フロントエンドはjQueryがそれなりにJavaScriptもやれます。React練習中です。このサイトはReactで実装してます。PHPをメイン言語としております。HTML作成からWebAPI叩きまでPHPです。フレームワークはLaravelそれなりですが、MVCならなんでもいけます。上級エンジニアと称して、月単価150万円で売られていたことがありますし、その際は詳細設計がされていなかったプロジェクトだったので旧コードを読み解いてSEっぽいこともしました。リプレースの案件得意です。全文検索のノウハウあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
+            最近、4年間やっていたプログラミングスクールの契約が週１回になってしまったので、フリーランスの案件を募集中です。また正社員として再就職できないかなとかもにらみつつ、paizaでSランクを目指してアルゴリズムの修行中です。</p>
             <IconList />
         </div>
     );
@@ -193,7 +193,7 @@ function BoxQuery() {
         <div className="box-query">
             <div className="item-list">
                 <h2 className="sub-title"><span className="color-green">お</span>問合せ</h2>
-                <p>インターネットよろず相談、無料で受け付けております。ホームページ作成からシステム構築までなんでもご相談ください。調査無料！</p>
+                <p>インターネットなんでも相談、相談は無料で受け付けております。ホームページ作成からシステム構築から社内DXまでなんでもご相談ください。調査無料！</p>
                 <div className="mb-3">
                     <a className="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc1zvEIQ5dCQ7-oIINHdlzPHvpkLNY0bt0USTr-k1b84qJxlQ/viewform">お問い合せ</a>
                 </div>
