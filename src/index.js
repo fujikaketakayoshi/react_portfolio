@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import './index.css';
@@ -36,7 +36,7 @@ function Profile() {
 function ItemList() {
     return (
         <div className="item-list">
-            <img className="profile" src="img/profile.jpg" alt="プロフィール画像" />
+            <img className="profile" src={`${process.env.PUBLIC_URL}/img/profile.jpg`} alt="プロフィール画像" />
             <b>藤掛貴由</b>
             <p className="color-green">Perl / PHP / Ruby / MySQL / JavaScript / CodeIgniter / Laravel</p>
             <p>主にサーバサイドの開発をやりますが、フロントエンドはjQueryがそれなりにJavaScriptもやれます。React練習中です。このサイトはReactで実装してます。PHPをメイン言語としております。HTML作成からWebAPI叩きまでPHPです。フレームワークはLaravelそれなりですが、MVCならなんでもいけます。上級エンジニアと称して、月単価150万円で売られていたことがありますし、その際は詳細設計がされていなかったプロジェクトだったので旧コードを読み解いてSEっぽいこともしました。リプレースの案件得意です。全文検索のノウハウあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
@@ -46,78 +46,68 @@ function ItemList() {
     );
 }
 
-class IconList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoaded: false,
-            error: null,
-            icon_sort: true,
-            icons: []
-        };
-        this.handleClick = this.handleClick.bind(this);
-    }
-    
-    handleClick() {
-         const url = this.state.icon_sort ? "iconlist_re.json" : "iconlist.json";
+
+
+
+function IconList() {
+    const [icons, setIcons] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [error, setError] = useState(null);
+    const [iconSort, setIconSort] = useState(true);
+
+    useEffect(() => {
+        fetch(`${process.env.PUBLIC_URL}/iconlist.json`)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                setIsLoaded(true);
+                setIcons(result.list);
+            },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
+            }
+        );
+    }, []); // ← 初回だけ実行
+
+    const handleClick = () => {
+        const url = iconSort
+        ? `${process.env.PUBLIC_URL}/iconlist_re.json`
+        : `${process.env.PUBLIC_URL}/iconlist.json`;
         fetch(url)
         .then(res => res.json())
         .then(
             (result) => {
-                this.setState({
-                    isLoaded: true,
-                    icons: result.list,
-                    icon_sort: ! this.state.icon_sort
-                });
+                setIsLoaded(true);
+                setIcons(result.list);
+                setIconSort(!iconSort);
             },
             (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error: error
-                });
+                setIsLoaded(true);
+                setError(error);
             }
-        )
-    }
-    
-    componentDidMount() {
-        fetch("iconlist.json")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({
-                    isLoaded: true,
-                    icons: result.list
-                });
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error: error
-                });
-            }
-        )
-    }
-    
-    render() {
-        if (this.state.error) {
-            return <div>Error: {this.state.error.message}</div>;
-        }
-        else if ( !this.state.isLoaded) {
-            return <div>Loading...</div>;
-        }
-        else {
-            return (
-                <ul className="icon-list">
-                        <button onClick={this.handleClick}>並び替え</button>
-                    {this.state.icons.map((v, index) => (
-                        <li key={index}>
-                            <a href={v.link}><img className={v.className} src={v.src} alt={v.alt} /></a>
-                        </li>
-                    ))}
-                </ul>
-            );
-        }
-    }
+        );
+    };
+
+    if (error) return <div>Error: {error.message}</div>;
+    if (!isLoaded) return <div>Loading...</div>;
+
+    return (
+        <ul className="icon-list">
+        <button onClick={handleClick}>並び替え</button>
+        {icons.map((v, index) => (
+            <li key={index}>
+            <a href={v.link}>
+                <img
+                className={v.className}
+                src={`${process.env.PUBLIC_URL}/${v.src}`}
+                alt={v.alt}
+                />
+            </a>
+            </li>
+        ))}
+        </ul>
+    );
 }
 
 function Works() {
@@ -129,63 +119,48 @@ function Works() {
     );
 }
 
-class WorksList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoaded: false,
-            error: null,
-            works: []
-        };
-    }
-    
-    componentDidMount() {
-        fetch("workslist.json")
+function WorksList() {
+    const [works, setWorks] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch(`${process.env.PUBLIC_URL}/workslist.json`)
         .then(res => res.json())
         .then(
             (result) => {
-                this.setState({
-                    isLoaded: true,
-                    works: result.list
-                });
+                setIsLoaded(true);
+                setWorks(result.list);
             },
             (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error: error
-                });
+                setIsLoaded(true);
+                setError(error);
             }
-        )
-    }
+        );
+    }, []);
 
-    render() {
-        if (this.state.error) {
-            return <div>Error: {this.state.error.message}</div>;
-        }
-        else if ( !this.state.isLoaded) {
-            return <div>Loading...</div>;
-        }
-        else {
-            return (
-                <ul className="works-list">
-                    {this.state.works.map(v => (
-                        <li key={v.id.toString()}>
-                            <img src={v.src} alt={v.alt} />
-                            <h3>{v.h3_text}</h3>
-                            <span>{v.tech}</span>
-                            <div className={v.className}>
-                            { v.className === 'link' &&
-                                v.links.map((vv, index) => (
-                                    <a key={index} href={vv.href}>{vv.a_text}</a>
-                                ))
-                             }
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            );
-        }
-    }
+    if (error) return <div>Error: {error.message}</div>;
+    if (!isLoaded) return <div>Loading...</div>;
+
+    return (
+        <ul className="works-list">
+        {works.map((v) => (
+            <li key={v.id.toString()}>
+            <img src={`${process.env.PUBLIC_URL}/${v.src}`} alt={v.alt} />
+            <h3>{v.h3_text}</h3>
+            <span>{v.tech}</span>
+            <div className={v.className}>
+                {v.className === "link" &&
+                v.links.map((vv, index) => (
+                    <a key={index} href={vv.href}>
+                    {vv.a_text}
+                    </a>
+                ))}
+            </div>
+            </li>
+        ))}
+        </ul>
+    );
 }
 
 function BoxQuery() {
