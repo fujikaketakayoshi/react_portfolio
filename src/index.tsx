@@ -36,7 +36,7 @@ function Profile() {
 function ItemList() {
     return (
         <div className="item-list">
-            <img className="profile" src={`${process.env.PUBLIC_URL}/img/profile.jpg`} alt="プロフィール画像" />
+            <img className="profile" src={`${import.meta.env.BASE_URL}img/profile.jpg`} alt="プロフィール画像" />
             <b>藤掛貴由</b>
             <p className="color-green">Perl / PHP / Ruby / MySQL / JavaScript / CodeIgniter / Laravel</p>
             <p>主にサーバサイドの開発をやりますが、フロントエンドはjQueryがそれなりにJavaScriptもやれます。React練習中です。このサイトはReactで実装してます。PHPをメイン言語としております。HTML作成からWebAPI叩きまでPHPです。フレームワークはLaravelそれなりですが、MVCならなんでもいけます。上級エンジニアと称して、月単価150万円で売られていたことがありますし、その際は詳細設計がされていなかったプロジェクトだったので旧コードを読み解いてSEっぽいこともしました。リプレースの案件得意です。全文検索のノウハウあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
@@ -61,7 +61,7 @@ function IconList() {
     const [iconSort, setIconSort] = useState(true);
 
     useEffect(() => {
-        fetch(`${process.env.PUBLIC_URL}/iconlist.json`)
+        fetch(`iconlist.json`)
         .then(res => res.json())
         .then(
             (result) => {
@@ -77,8 +77,8 @@ function IconList() {
 
     const handleClick = () => {
         const url = iconSort
-        ? `${process.env.PUBLIC_URL}/iconlist_re.json`
-        : `${process.env.PUBLIC_URL}/iconlist.json`;
+        ? `iconlist_re.json`
+        : `iconlist.json`;
         fetch(url)
         .then(res => res.json())
         .then(
@@ -105,7 +105,7 @@ function IconList() {
             <a href={v.link}>
                 <img
                 className={v.className}
-                src={`${process.env.PUBLIC_URL}/${v.src}`}
+                src={`${import.meta.env.BASE_URL}/${v.src}`}
                 alt={v.alt}
                 />
             </a>
@@ -145,7 +145,7 @@ function WorksList() {
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        fetch(`${process.env.PUBLIC_URL}/workslist.json`)
+        fetch(`workslist.json`)
         .then(res => res.json())
         .then(
             (result: { list: Work[] }) => {
@@ -166,7 +166,7 @@ function WorksList() {
         <ul className="works-list">
         {works.map((v: Work) => (
             <li key={v.id}>
-            <img src={`${process.env.PUBLIC_URL}/${v.src}`} alt={v.alt} />
+            <img src={`${import.meta.env.BASE_URL}/${v.src}`} alt={v.alt} />
             <h3>{v.h3_text}</h3>
             <span>{v.tech}</span>
             <div className={v.className}>
