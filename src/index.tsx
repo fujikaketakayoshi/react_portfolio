@@ -47,12 +47,17 @@ function ItemList() {
 }
 
 
-
+interface Icon {
+    link: string;
+    className: string;
+    src: string;
+    alt: string;
+}
 
 function IconList() {
-    const [icons, setIcons] = useState([]);
+    const [icons, setIcons] = useState<Icon[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<Error | null>(null);
     const [iconSort, setIconSort] = useState(true);
 
     useEffect(() => {
@@ -77,7 +82,7 @@ function IconList() {
         fetch(url)
         .then(res => res.json())
         .then(
-            (result) => {
+            (result: { list: Icon[] }) => {
                 setIsLoaded(true);
                 setIcons(result.list);
                 setIconSort(!iconSort);
@@ -119,16 +124,31 @@ function Works() {
     );
 }
 
+interface WorkLink {
+    href: string;
+    a_text: string;
+}
+
+interface Work {
+    id: number;
+    className: string;
+    src: string;
+    alt: string;
+    h3_text: string;
+    tech: string;
+    links?: WorkLink[];
+}
+
 function WorksList() {
-    const [works, setWorks] = useState([]);
+    const [works, setWorks] = useState<Work[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         fetch(`${process.env.PUBLIC_URL}/workslist.json`)
         .then(res => res.json())
         .then(
-            (result) => {
+            (result: { list: Work[] }) => {
                 setIsLoaded(true);
                 setWorks(result.list);
             },
@@ -144,14 +164,14 @@ function WorksList() {
 
     return (
         <ul className="works-list">
-        {works.map((v) => (
-            <li key={v.id.toString()}>
+        {works.map((v: Work) => (
+            <li key={v.id}>
             <img src={`${process.env.PUBLIC_URL}/${v.src}`} alt={v.alt} />
             <h3>{v.h3_text}</h3>
             <span>{v.tech}</span>
             <div className={v.className}>
                 {v.className === "link" &&
-                v.links.map((vv, index) => (
+                v.links?.map((vv, index) => (
                     <a key={index} href={vv.href}>
                     {vv.a_text}
                     </a>
@@ -168,7 +188,7 @@ function BoxQuery() {
         <div className="box-query">
             <div className="item-list">
                 <h2 className="sub-title"><span className="color-green">お</span>問合せ</h2>
-                <p>インターネットなんでも相談、相談は無料で受け付けております。ホームページ作成からシステム構築から社内DXまでなんでもご相談ください。調査無料！</p>
+                <p>インターネットなんでも相談しております。相談は無料で受け付けております。ホームページ作成からシステム構築から社内DXまでなんでもご相談ください。調査無料！</p>
                 <div className="mb-3">
                     <a className="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc1zvEIQ5dCQ7-oIINHdlzPHvpkLNY0bt0USTr-k1b84qJxlQ/viewform">お問い合せ</a>
                 </div>
@@ -186,7 +206,7 @@ function Footer() {
 }
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
     <HashRouter>
         <div>
