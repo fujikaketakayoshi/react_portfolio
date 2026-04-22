@@ -56,6 +56,25 @@
                     "a_text": "GitHub"
                 }
             ]
+        },
+                {
+            "id": 5,
+            "src": "img/atamaoshiri.png",
+            "alt": "あたまおしりゲーム攻略の画像",
+            "h3_text": "あたまおしりゲーム攻略",
+            "tech": "FastAPI / Python / SQLite / AlmaLinux",
+            "className": "link",
+            "links": [
+                {
+                    "href": "https://atamaoshirigamekouryaku.com/",
+                    "a_text": "Webサイト"
+                },
+                {
+                    "href": "https://github.com/fujikaketakayoshi/atamaoshiri",
+                    "a_text": "GitHub"
+                }
+            ]
         }
+
     ]
 }
