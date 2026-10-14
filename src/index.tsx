@@ -33,14 +33,50 @@ function Profile() {
     );
 }
 
+interface ProfileData {
+    name: string;
+    skills: string;
+    image: {
+        src: string;
+        alt: string;
+    };
+    biography: string[];
+}
+
 function ItemList() {
+    const [profile, setProfile] = useState<ProfileData | null>(null);
+    const [error, setError] = useState<Error | null>(null);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        fetch(`${import.meta.env.BASE_URL}profile.json`, { signal: controller.signal })
+        .then(res => {
+            if (!res.ok) throw new Error(`プロフィールの読み込みに失敗しました (${res.status})`);
+            return res.json();
+        })
+        .then((result: ProfileData) => setProfile(result))
+        .catch((error: Error) => {
+            if (!controller.signal.aborted) setError(error);
+        });
+
+        return () => controller.abort();
+    }, []);
+
+    if (error) return <div role="alert">Error: {error.message}</div>;
+    if (!profile) return <div>Loading...</div>;
+
     return (
         <div className="item-list">
-            <img className="profile" src={`${import.meta.env.BASE_URL}img/profile.jpg`} alt="プロフィール画像" />
-            <b>藤掛貴由</b>
-            <p className="color-green">Perl / PHP / Ruby / MySQL / JavaScript / CodeIgniter / Laravel</p>
-            <p>主にサーバサイドの開発を行います。フロントエンドはJavaScriptそれなりに。このサイトはReactで実装してます。PHPをメイン言語としております。最近はPythonで競プロに挑戦中です。フレームワークはLaravelがそこそこでFastAPIも始めましたが、MVCならなんでもいけると思います。全文検索のノウハウあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
-            AI使って構築した小規模ホスティングプログラムを配布するfujikake-productsというサイトを始めました。</p>
+            <img className="profile" src={`${import.meta.env.BASE_URL}${profile.image.src}`} alt={profile.image.alt} />
+            <b>{profile.name}</b>
+            <p className="color-green">{profile.skills}</p>
+            <p>{profile.biography.map((text, index) => (
+                <span key={index}>
+                    {index > 0 && <br />}
+                    {text}
+                </span>
+            ))}</p>
             <IconList />
         </div>
     );
