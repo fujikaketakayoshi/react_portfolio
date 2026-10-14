@@ -40,7 +40,7 @@ function ItemList() {
             <b>藤掛貴由</b>
             <p className="color-green">Perl / PHP / Ruby / MySQL / JavaScript / CodeIgniter / Laravel</p>
             <p>主にサーバサイドの開発を行います。フロントエンドはJavaScriptそれなりに。このサイトはReactで実装してます。PHPをメイン言語としております。最近はPythonで競プロに挑戦中です。フレームワークはLaravelがそこそこでFastAPIも始めましたが、MVCならなんでもいけると思います。全文検索のノウハウあります。石川県能登地方でDX人材をお探しの企業様などお声がけください。コンサルもします。<br />
-            最近、5年間やっていたプログラミングスクールの講師がお休みに入りましてフリーランスの案件を探しています。</p>
+            AI使って構築した小規模ホスティングプログラムを配布するfujikake-productsというサイトを始めました。</p>
             <IconList />
         </div>
     );
